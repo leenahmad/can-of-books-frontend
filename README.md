@@ -38,12 +38,12 @@ Clone this repo to your own account with the green "Use this template" button. T
 Time Estimates
 
 
-Name of feature: _________mongo database__________
+Name of feature: _________mongo database/create&delete_________
 
 Estimate of time needed to complete: __2 hours___
 
-Start time: __3___
+Start time: __6__
 
-Finish time: __5___
+Finish time: ___9__
 
 Actual time needed to complete: __2hours___
