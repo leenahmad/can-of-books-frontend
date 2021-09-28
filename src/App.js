@@ -7,6 +7,7 @@ import BestBooks from "./BestBooks";
 import Login from "./Login";
 import { withAuth0 } from "@auth0/auth0-react";
 
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
@@ -25,10 +26,11 @@ class App extends React.Component {
               </Route>
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
               <Route exact path="/Profile">
-                <Profile/>
+                <Profile />
               </Route>
 
-              <BestBooks/>
+              <BestBooks />
+              
             </Switch>
             <Footer />
           </IsLoadingAndError>
