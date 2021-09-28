@@ -27,6 +27,8 @@ class App extends React.Component {
               <Route exact path="/Profile">
                 <Profile/>
               </Route>
+
+              <BestBooks/>
             </Switch>
             <Footer />
           </IsLoadingAndError>
