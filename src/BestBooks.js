@@ -44,6 +44,7 @@ class MyFavoriteBooks extends React.Component {
     );
 
     this.setState({
+      BookData : newData.data,
       books: newData.data,
     });
   };
@@ -55,6 +56,7 @@ class MyFavoriteBooks extends React.Component {
     let newBook = await axios.delete(`${process.env.REACT_APP_SERVER}/deleteBook?bookID=${bookID}&email=${this.state.email}`)
 
     this.setState({
+      BookData : newBook.data,
       books: newBook.data
     })
   }
