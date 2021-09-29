@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 
+
 class Data extends Component {
   deleteHandler = () => {
     this.props.deleteFunc(this.props.book._id);
@@ -19,7 +20,9 @@ class Data extends Component {
 
             <Card.Text>{this.props.book.email}</Card.Text>
             <br />
-            <button onClick={this.deleteHandler}>X</button>
+            <button onClick={this.deleteHandler}> X </button>
+
+            <button onClick ={() => {this.props.showUpdateForm(this.props.book)}}> Update </button>
           </Card.Body>
         </Card>
       </div>
