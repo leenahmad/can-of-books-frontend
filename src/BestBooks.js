@@ -7,13 +7,14 @@ import { withAuth0 } from "@auth0/auth0-react";
 import Databook from "./components/Databook";
 import { Row } from "react-bootstrap";
 import Bookform from "./components/Bookform";
-import updateForm from "./components/updateForm";
+import UpdateForm from "./components/updateForm";
 
 class MyFavoriteBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       BookData: [],
+      showUpdateForm:false,
       searchQuery: "",
       bookInfoUpdate:{}
     };
@@ -65,6 +66,7 @@ class MyFavoriteBooks extends React.Component {
   showUpdateForm = async (bookInfo) =>{
 
     await this.setState({
+      showUpdateForm: true,
       bookInfoUpdate : bookInfo
     })
   }
@@ -86,7 +88,7 @@ class MyFavoriteBooks extends React.Component {
     let newBook = await axios.put(`${process.env.REACT_APP_SERVER}/updateBook`, bookFormInfo);
 
     this.setState({
-      
+      BookData : newBook.data,
       books: newBook.data
     })
   }
@@ -114,7 +116,7 @@ class MyFavoriteBooks extends React.Component {
 
 
         {this.state.showUpdateForm && 
-        <updateForm 
+        <UpdateForm 
         bookInfo={this.state.bookInfoUpdate}
         updateBook={this.updateBook}/>}
 
