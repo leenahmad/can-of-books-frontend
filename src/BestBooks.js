@@ -7,6 +7,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import Databook from "./components/Databook";
 import { Row } from "react-bootstrap";
 import Bookform from "./components/Bookform";
+import updateForm from "./components/updateForm";
 
 class MyFavoriteBooks extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class MyFavoriteBooks extends React.Component {
     this.state = {
       BookData: [],
       searchQuery: "",
+      bookInfoUpdate:{}
     };
   }
 
@@ -39,9 +41,8 @@ class MyFavoriteBooks extends React.Component {
       email: e.target.email.value,
     };
     let newData = await axios.post(
-      `${process.env.REACT_APP_SERVER}/addBook`,
-      bookFormInfo
-    );
+      `${process.env.REACT_APP_SERVER}/addBook`, bookFormInfo);
+    
 
     this.setState({
       BookData : newData.data,
@@ -61,6 +62,37 @@ class MyFavoriteBooks extends React.Component {
     })
   }
 
+  showUpdateForm = async (bookInfo) =>{
+
+    await this.setState({
+      bookInfoUpdate : bookInfo
+    })
+  }
+
+  updateBook = async (e) =>{
+    e.preventDefault();
+
+    console.log('bookInfo' , this.state.bookInfoUpdate._id);
+
+    let bookFormInfo = {
+      title: e.target.title.value,
+      description: e.target.description.value,
+      status: e.target.status.value,
+      email: e.target.email.value,
+
+      bookID: this.state.bookInfoUpdate._id,
+    }
+
+    let newBook = await axios.put(`${process.env.REACT_APP_SERVER}/updateBook`, bookFormInfo);
+
+    this.setState({
+      
+      books: newBook.data
+    })
+  }
+
+
+
   render() {
     return (
       <>
@@ -71,12 +103,21 @@ class MyFavoriteBooks extends React.Component {
         <Row>
           {this.state.BookData.map((element, index) => {
             return <Databook key={index} book={element} 
-            deleteFunc={this.deleteBook}/>;
+            deleteFunc={this.deleteBook} showUpdateForm={this.showUpdateForm}/>;
           })}
 
          
         </Row>
         <Bookform addBookFun={this.addBook} />
+
+
+
+
+        {this.state.showUpdateForm && 
+        <updateForm 
+        bookInfo={this.state.bookInfoUpdate}
+        updateBook={this.updateBook}/>}
+
       </>
     );
   }
